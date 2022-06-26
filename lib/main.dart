@@ -1,3 +1,4 @@
+import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
@@ -8,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'First App',
+      title: 'Startup Name Generator',
       theme: ThemeData(primarySwatch: Colors.amber),
       home: const MyHomePage(title: 'MyHomePage'),
     );
@@ -23,18 +24,9 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Home Page'),
+          title: const Text('Welcome to Flutter'),
         ),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-              BoxCustomComponent(name: "Lorem"),
-              SizedBox(height: 8.0),
-              BoxCustomComponent(name: "Ipsum"),
-              SizedBox(height: 8.0),
-              BoxCustomComponent(name: "Dolor")
-            ])),
+        body: const Center(child: RandomWords()),
         floatingActionButton: FloatingActionButton(
             onPressed: () => print('hello world'),
             tooltip: 'Increment Counter',
@@ -55,5 +47,35 @@ class BoxCustomComponent extends StatelessWidget {
           padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Text(name)),
     );
+  }
+}
+
+class RandomWords extends StatefulWidget {
+  const RandomWords({Key? key}) : super(key: key);
+
+  @override
+  State<RandomWords> createState() => _RandomWordsState();
+}
+
+class _RandomWordsState extends State<RandomWords> {
+  final _suggestions = <WordPair>[];
+  final _biggerFont = const TextStyle(fontSize: 18);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemBuilder: (context, i) {
+          print(i);
+          if (i.isOdd) return const Divider();
+          final index = i ~/ 2; /*3*/
+
+          if (index >= _suggestions.length) {
+            _suggestions.addAll(generateWordPairs().take(10));
+          }
+          return ListTile(
+              title:
+                  Text(_suggestions[index].asPascalCase, style: _biggerFont));
+        });
   }
 }

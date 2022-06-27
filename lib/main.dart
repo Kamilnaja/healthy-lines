@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'BlinkingTimer.dart';
+import 'Login.dart';
 
 void main() => runApp(const MyApp());
 
@@ -41,7 +42,15 @@ class MyHomePage extends StatelessWidget {
             Column(
               children: [
                 const SizedBox(height: 30),
-                ElevatedButton(onPressed: () {}, child: const Text('Login')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const Login(
+                                data: 'Please login or create account',
+                                key: null,
+                              )));
+                    },
+                    child: const Text('Login screen')),
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(

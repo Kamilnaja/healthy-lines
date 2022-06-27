@@ -1,5 +1,6 @@
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+
+import 'BlinkingTimer.dart';
 
 void main() => runApp(const MyApp());
 
@@ -24,58 +25,35 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Welcome to Flutter'),
+          title: const Text('Healthy lines'),
         ),
-        body: const Center(child: RandomWords()),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () => print('hello world'),
-            tooltip: 'Increment Counter',
-            child: const Icon(Icons.add)));
-  }
-}
-
-class BoxCustomComponent extends StatelessWidget {
-  final String name;
-
-  const BoxCustomComponent({Key? key, required this.name}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(color: Colors.lightBlueAccent),
-      child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-          child: Text(name)),
-    );
-  }
-}
-
-class RandomWords extends StatefulWidget {
-  const RandomWords({Key? key}) : super(key: key);
-
-  @override
-  State<RandomWords> createState() => _RandomWordsState();
-}
-
-class _RandomWordsState extends State<RandomWords> {
-  final _suggestions = <WordPair>[];
-  final _biggerFont = const TextStyle(fontSize: 18);
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          print(i);
-          if (i.isOdd) return const Divider();
-          final index = i ~/ 2; /*3*/
-
-          if (index >= _suggestions.length) {
-            _suggestions.addAll(generateWordPairs().take(10));
-          }
-          return ListTile(
-              title:
-                  Text(_suggestions[index].asPascalCase, style: _biggerFont));
-        });
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+                padding: const EdgeInsets.all(15),
+                child: const Text(
+                    "Welcome in healthy lines. This is an awesome app that will help you achieving your health goals",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        backgroundColor: Colors.lightBlueAccent))),
+            Column(
+              children: [
+                const SizedBox(height: 30),
+                ElevatedButton(onPressed: () {}, child: const Text('Login')),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const BlinkingTimer(
+                                data: 'Hello from the first page',
+                                key: null,
+                              )));
+                    },
+                    child: const Text('Go to blinking screen')),
+              ],
+            ),
+          ],
+        ));
   }
 }

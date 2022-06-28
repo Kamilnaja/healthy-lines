@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class BlinkingTimer extends StatefulWidget {
@@ -8,12 +10,22 @@ class BlinkingTimer extends StatefulWidget {
 }
 
 class _BlikingTimerState extends State<BlinkingTimer> {
+  Timer? timer;
+  var _isRunning = false;
   int _count = 0;
 
   void incrementCount() {
     setState(() {
       _count++;
     });
+  }
+
+  void startTimer() {
+    if (!_isRunning) {
+      _isRunning = true;
+      timer = Timer.periodic(
+          const Duration(seconds: 1), (Timer timer) => incrementCount());
+    }
   }
 
   @override
@@ -29,7 +41,7 @@ class _BlikingTimerState extends State<BlinkingTimer> {
           OutlinedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.lightBlueAccent, onPrimary: Colors.white),
-              onPressed: () => {incrementCount()},
+              onPressed: () => {startTimer()},
               child: const Text('Start session'))
         ])));
   }

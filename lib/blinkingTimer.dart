@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import './utils/format_time.dart';
 
 class BlinkingTimer extends StatefulWidget {
   const BlinkingTimer({Key? key}) : super(key: key);
@@ -12,11 +13,11 @@ class BlinkingTimer extends StatefulWidget {
 class _BlikingTimerState extends State<BlinkingTimer> {
   Timer? timer;
   var _isRunning = false;
-  int _count = 0;
+  int _maxCount = 15 * 60;
 
-  void incrementCount() {
+  void decrementCount() {
     setState(() {
-      _count++;
+      _maxCount--;
     });
   }
 
@@ -24,7 +25,7 @@ class _BlikingTimerState extends State<BlinkingTimer> {
     if (!_isRunning) {
       _isRunning = true;
       timer = Timer.periodic(
-          const Duration(seconds: 1), (Timer timer) => incrementCount());
+          const Duration(seconds: 1), (Timer timer) => decrementCount());
     }
   }
 
@@ -35,7 +36,7 @@ class _BlikingTimerState extends State<BlinkingTimer> {
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(
-            _count.toString(),
+            formatTime(_maxCount),
             style: const TextStyle(fontSize: 50),
           ),
           OutlinedButton(
@@ -46,3 +47,5 @@ class _BlikingTimerState extends State<BlinkingTimer> {
         ])));
   }
 }
+
+

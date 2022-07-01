@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healty_lines/router/router_generator.dart';
+import 'package:healthy_lines/router/router_generator.dart';
 
 import 'homePage.dart';
 

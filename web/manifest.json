@@ -1,6 +1,6 @@
 {
-    "name": "healty_lines",
-    "short_name": "healty_lines",
+    "name": "healthy_lines",
+    "short_name": "healthy_lines",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

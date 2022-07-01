@@ -1,4 +1,4 @@
-package com.example.healty_lines
+package com.example.healthy_lines
 
 import io.flutter.embedding.android.FlutterActivity
 

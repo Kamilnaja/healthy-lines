@@ -1,4 +1,4 @@
-# healty_lines
+# healthy_lines
 
 A new Flutter project.
 

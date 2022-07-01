@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'customDrawer.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -38,21 +40,6 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        drawer: Drawer(
-            child: ListView(padding: const EdgeInsets.all(0), children: const [
-          SizedBox(height: 40),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Lorem"),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Ipsum"),
-          ),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text("Dolor"),
-          )
-        ])));
+        drawer: const CustomDrawer());
   }
 }

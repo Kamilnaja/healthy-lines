@@ -12,13 +12,12 @@ class BlinkingTimer extends StatefulWidget {
 
 class _BlinkingTimerState extends State<BlinkingTimer> {
   Timer? timer;
-  final int _initialTimer = 5;
-  int _currentTime = 5;
+  final int _initialTimer = 15;
+  int _currentTime = 0;
   bool _isRunning = false;
-  bool _canRun = true;
 
   void startTimer() {
-    if (_isRunning || !_canRun) return;
+    if (_isRunning) return;
     _isRunning = true;
     timer = Timer.periodic(
         const Duration(seconds: 1), (Timer timer) => decrementCount());
@@ -30,17 +29,14 @@ class _BlinkingTimerState extends State<BlinkingTimer> {
       _showDialog(context);
       return resetTimerOnTimeEnd();
     }
-    setState(() {
-      _currentTime--;
-    });
+    setState(() => _currentTime--);
   }
 
   void resetTimerOnTimeEnd() {
     _isRunning = false;
-    _canRun = true;
     timer?.cancel();
     _currentTime = _initialTimer;
-    setState(() => {_currentTime = _initialTimer});
+    setState(() => _currentTime = _initialTimer);
   }
 
   @override

@@ -16,6 +16,7 @@ class _BlikingTimerState extends State<BlinkingTimer> {
   int _maxCount = 15 * 60;
 
   void decrementCount() {
+    if (!mounted) return;
     setState(() {
       _maxCount--;
     });
@@ -47,5 +48,3 @@ class _BlikingTimerState extends State<BlinkingTimer> {
         ])));
   }
 }
-
-

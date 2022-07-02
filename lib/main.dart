@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:healthy_lines/router/router_generator.dart';
 
 import 'homePage.dart';
 
-void main() => runApp(const MyApp());
+void main() {
+  debugRepaintRainbowEnabled = true;
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

@@ -12,22 +12,35 @@ class BlinkingTimer extends StatefulWidget {
 
 class _BlinkingTimerState extends State<BlinkingTimer> {
   Timer? timer;
-  var _isRunning = false;
-  int _maxCount = 15 * 60;
+  final int _initialTimer = 5;
+  int _currentTime = 5;
+  bool _isRunning = false;
+  bool _canRun = true;
+
+  void startTimer() {
+    if (_isRunning || !_canRun) return;
+    _isRunning = true;
+    timer = Timer.periodic(
+        const Duration(seconds: 1), (Timer timer) => decrementCount());
+  }
 
   void decrementCount() {
     if (!mounted) return;
+    if (_currentTime <= 0) {
+      _showDialog(context);
+      return resetTimerOnTimeEnd();
+    }
     setState(() {
-      _maxCount--;
+      _currentTime--;
     });
   }
 
-  void startTimer() {
-    if (!_isRunning) {
-      _isRunning = true;
-      timer = Timer.periodic(
-          const Duration(seconds: 1), (Timer timer) => decrementCount());
-    }
+  void resetTimerOnTimeEnd() {
+    _isRunning = false;
+    _canRun = true;
+    timer?.cancel();
+    _currentTime = _initialTimer;
+    setState(() => {_currentTime = _initialTimer});
   }
 
   @override
@@ -37,14 +50,33 @@ class _BlinkingTimerState extends State<BlinkingTimer> {
         body: Center(
             child: Column(mainAxisSize: MainAxisSize.min, children: [
           Text(
-            formatTime(_maxCount),
+            formatTime(_currentTime),
             style: const TextStyle(fontSize: 50),
           ),
           OutlinedButton(
               style: ElevatedButton.styleFrom(
                   primary: Colors.lightBlueAccent, onPrimary: Colors.white),
               onPressed: () => {startTimer()},
-              child: const Text('Start session'))
+              child: Text(_isRunning ? 'Running' : 'Start session'))
         ])));
+  }
+
+  void _showDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Alert!!"),
+          content:
+              const Text("Please stare at the distant object for a moment"),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

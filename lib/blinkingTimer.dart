@@ -7,10 +7,10 @@ class BlinkingTimer extends StatefulWidget {
   const BlinkingTimer({Key? key}) : super(key: key);
 
   @override
-  State<BlinkingTimer> createState() => _BlikingTimerState();
+  State<BlinkingTimer> createState() => _BlinkingTimerState();
 }
 
-class _BlikingTimerState extends State<BlinkingTimer> {
+class _BlinkingTimerState extends State<BlinkingTimer> {
   Timer? timer;
   var _isRunning = false;
   int _maxCount = 15 * 60;

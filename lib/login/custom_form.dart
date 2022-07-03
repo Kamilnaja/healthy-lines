@@ -11,6 +11,7 @@ class CustomForm extends StatefulWidget {
 
 class _CustomFormState extends State<CustomForm> {
   final _formKey = GlobalKey<FormState>();
+  final textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,35 @@ class _CustomFormState extends State<CustomForm> {
         child: Form(
             key: _formKey,
             child: Column(children: <Widget>[
-              createFormField('Username'),
-              createFormField('Email'),
-              createFormField('Password'),
-              createFormField('Repeat Password'),
+              TextFormField(
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.account_circle),
+                      border: UnderlineInputBorder(),
+                      labelText: 'Username'),
+                  validator: (value) {
+                    return validateIsEmpty(value);
+                  }),
+              TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.alternate_email),
+                      border: UnderlineInputBorder(),
+                      labelText: 'Email'),
+                  validator: (value) {
+                    return validateIsEmpty(value);
+                  }),
+              TextFormField(
+                obscureText: true,
+                controller: textEditingController,
+                decoration: const InputDecoration(
+                    icon: Icon(Icons.password), labelText: 'Password'),
+              ),
+              TextFormField(
+                  obscureText: true,
+                  controller: textEditingController,
+                  decoration: const InputDecoration(
+                      icon: Icon(Icons.password),
+                      labelText: 'Repeat Password')),
               ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -32,14 +58,5 @@ class _CustomFormState extends State<CustomForm> {
                   },
                   child: const Text('Submit'))
             ])));
-  }
-
-  Widget createFormField(String name) {
-    return TextFormField(
-        decoration: InputDecoration(
-            border: const UnderlineInputBorder(), labelText: name),
-        validator: (value) {
-          return validateIsEmpty(value);
-        });
   }
 }

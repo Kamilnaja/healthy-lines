@@ -14,7 +14,7 @@ class BlinkingTimer extends StatefulWidget {
 class _BlinkingTimerState extends State<BlinkingTimer> {
   Timer? timer;
   final int _initialTimer = 15;
-  int _currentTime = 0;
+  int _currentTime = 15;
   bool _isRunning = false;
 
   void startTimer() {

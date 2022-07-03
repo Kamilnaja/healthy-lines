@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../utils/validators/validate_is_empty.dart';
+import '../utils/validators/has_value.dart';
 
 class CustomForm extends StatefulWidget {
   const CustomForm({Key? key}) : super(key: key);
@@ -34,8 +34,9 @@ class _CustomFormState extends State<CustomForm> {
                       icon: Icon(Icons.account_circle),
                       border: UnderlineInputBorder(),
                       labelText: 'Username'),
+                  autofocus: true,
                   validator: (value) {
-                    return validateIsEmpty(value);
+                    return hasValue(value);
                   }),
               TextFormField(
                   keyboardType: TextInputType.emailAddress,
@@ -44,7 +45,7 @@ class _CustomFormState extends State<CustomForm> {
                       border: UnderlineInputBorder(),
                       labelText: 'Email'),
                   validator: (value) {
-                    return validateIsEmpty(value);
+                    return hasValue(value);
                   }),
               TextFormField(
                 obscureText: true,
@@ -63,6 +64,8 @@ class _CustomFormState extends State<CustomForm> {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(_formKey.toString())));
+                      _formKey.currentState?.save();
+                      print(textEditingController.text);
                     }
                   },
                   child: const Text('Submit'))

@@ -17,11 +17,12 @@ class HomePage extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.all(15),
                 child: const Text(
-                    "Welcome in healthy lines. This is an awesome app that will help you achieving your health goals",
+                    "Welcome in healthy lines. We will help you achieving your health goals",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        backgroundColor: Colors.lightBlueAccent))),
+                      color: Colors.lightGreen,
+                      fontSize: 40,
+                    ))),
             Column(
               children: [
                 const SizedBox(height: 30),

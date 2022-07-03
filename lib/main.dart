@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:healthy_lines/router/router_generator.dart';
 
 import 'homePage.dart';
 
 void main() {
-  debugRepaintRainbowEnabled = true;
+  // debugRepaintRainbowEnabled = true;
   runApp(const MyApp());
 }
 

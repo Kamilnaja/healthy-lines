@@ -14,11 +14,20 @@ class _CustomFormState extends State<CustomForm> {
   final textEditingController = TextEditingController();
 
   @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
         child: Form(
             key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(children: <Widget>[
               TextFormField(
                   decoration: const InputDecoration(
@@ -53,7 +62,7 @@ class _CustomFormState extends State<CustomForm> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Processing data')));
+                          SnackBar(content: Text(_formKey.toString())));
                     }
                   },
                   child: const Text('Submit'))

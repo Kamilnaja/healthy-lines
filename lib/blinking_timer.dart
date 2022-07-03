@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+
 import './utils/format_time.dart';
 
 class BlinkingTimer extends StatefulWidget {

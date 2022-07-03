@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../blinkingTimer.dart';
 import '../homePage.dart';
-import '../login.dart';
+import '../login/login.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

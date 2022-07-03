@@ -23,6 +23,11 @@ class _CustomFormState extends State<CustomForm> {
 
   @override
   Widget build(BuildContext context) {
+    String? username = '';
+    String? email = '';
+    String? password = '';
+    String? repeatedPassword = '';
+
     return Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 0, 15.0, 0),
         child: Form(
@@ -30,6 +35,9 @@ class _CustomFormState extends State<CustomForm> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(children: <Widget>[
               TextFormField(
+                  onSaved: (value) {
+                    username = value;
+                  },
                   decoration: const InputDecoration(
                       icon: Icon(Icons.account_circle),
                       border: UnderlineInputBorder(),
@@ -39,6 +47,9 @@ class _CustomFormState extends State<CustomForm> {
                     return hasValue(value);
                   }),
               TextFormField(
+                  onSaved: (value) {
+                    email = value;
+                  },
                   keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                       icon: Icon(Icons.alternate_email),
@@ -48,12 +59,18 @@ class _CustomFormState extends State<CustomForm> {
                     return hasValue(value);
                   }),
               TextFormField(
+                onSaved: (value) {
+                  password = value;
+                },
                 obscureText: true,
                 controller: textEditingController,
                 decoration: const InputDecoration(
                     icon: Icon(Icons.password), labelText: 'Password'),
               ),
               TextFormField(
+                  onSaved: (value) {
+                    repeatedPassword = value;
+                  },
                   obscureText: true,
                   controller: textEditingController,
                   decoration: const InputDecoration(
@@ -63,9 +80,9 @@ class _CustomFormState extends State<CustomForm> {
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(_formKey.toString())));
+                          const SnackBar(content: Text('Saving data')));
                       _formKey.currentState?.save();
-                      print(textEditingController.text);
+                      print({password, repeatedPassword, email, username});
                     }
                   },
                   child: const Text('Submit'))

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import './utils/format_time.dart';
+import 'config/config.dart';
 
 class BlinkingTimer extends StatefulWidget {
   const BlinkingTimer({Key? key}) : super(key: key);
@@ -13,8 +14,7 @@ class BlinkingTimer extends StatefulWidget {
 
 class _BlinkingTimerState extends State<BlinkingTimer> {
   Timer? timer;
-  final int _initialTimer = 15;
-  int _currentTime = 15;
+  int _currentTime = blinkingInterval;
   bool _isRunning = false;
 
   void startTimer() {
@@ -36,8 +36,8 @@ class _BlinkingTimerState extends State<BlinkingTimer> {
   void resetTimerOnTimeEnd() {
     _isRunning = false;
     timer?.cancel();
-    _currentTime = _initialTimer;
-    setState(() => _currentTime = _initialTimer);
+    _currentTime = blinkingInterval;
+    setState(() => _currentTime = blinkingInterval);
   }
 
   @override

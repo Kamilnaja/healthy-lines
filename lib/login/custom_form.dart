@@ -12,6 +12,7 @@ class CustomForm extends StatefulWidget {
 class _CustomFormState extends State<CustomForm> {
   final _formKey = GlobalKey<FormState>();
   final textEditingController = TextEditingController();
+  final usernameController = TextEditingController();
 
   @override
   void dispose() {
@@ -23,7 +24,6 @@ class _CustomFormState extends State<CustomForm> {
 
   @override
   Widget build(BuildContext context) {
-    String? username = '';
     String? email = '';
     String? password = '';
     String? repeatedPassword = '';
@@ -35,9 +35,7 @@ class _CustomFormState extends State<CustomForm> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(children: <Widget>[
               TextFormField(
-                  onSaved: (value) {
-                    username = value;
-                  },
+                  controller: usernameController,
                   decoration: const InputDecoration(
                       icon: Icon(Icons.account_circle),
                       border: UnderlineInputBorder(),
@@ -82,7 +80,12 @@ class _CustomFormState extends State<CustomForm> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text('Saving data')));
                       _formKey.currentState?.save();
-                      print({password, repeatedPassword, email, username});
+                      print({
+                        password,
+                        repeatedPassword,
+                        email,
+                        usernameController.text
+                      });
                     }
                   },
                   child: const Text('Submit'))

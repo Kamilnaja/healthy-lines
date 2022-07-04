@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../blinking_timer.dart';
-import '../home_page.dart';
+import '../home/home_page.dart';
 import '../login/login.dart';
 
 class RouteGenerator {

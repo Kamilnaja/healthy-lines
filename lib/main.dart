@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_lines/router/router_generator.dart';
 
-import 'home_page.dart';
+import 'home/home_page.dart';
 
 void main() {
   // debugRepaintRainbowEnabled = true;

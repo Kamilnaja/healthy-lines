@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_drawer.dart';
+import '../custom_drawer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,13 +16,11 @@ class HomePage extends StatelessWidget {
           children: [
             Container(
                 padding: const EdgeInsets.all(15),
-                child: const Text(
-                    "Welcome in healthy lines. We will help you achieving your health goals",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.lightGreen,
-                      fontSize: 40,
-                    ))),
+                child: const Center(
+                  child: Text("Healthy lines",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 30)),
+                )),
             Column(
               children: [
                 const SizedBox(height: 30),

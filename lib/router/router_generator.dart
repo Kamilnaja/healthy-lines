@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_lines/about_us/about_us.dart';
 
 import '../blinking_timer.dart';
 import '../home/home_page.dart';
@@ -17,10 +18,13 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => const BlinkingTimer(),
         );
+      case '/about_us':
+        return MaterialPageRoute(builder: (_) => const AboutUs());
       case '/login':
         if (args is String) {
           return MaterialPageRoute(builder: (_) => Login(data: args));
         }
+
         // If args is not of the correct type, return an error page.
         // You can also throw an exception while in development.
         return _errorRoute();
